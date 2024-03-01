@@ -1,0 +1,52 @@
+<!-- about.ejs -->
+
+<style>
+    #map {
+      width: 100%;
+      height: 400px;
+      margin: 0 auto;
+    }
+  </style>
+  
+  <h1>About</h1>
+  
+  <div id="map"></div>
+  
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+  
+  <script>
+    // Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFraGltMTEiLCJhIjoiY2x0NXJ2cDVvMDAxZTJqb2RtNGk5MTF4cCJ9.aubdaqsMt8Fiitw5Lc7guQ';
+  
+    // Initialize Mapbox map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11', // Map style
+      center: [0, 0], // Initial map center
+      zoom: 2 // Initial zoom level
+    });
+  
+    // Function to update markers for flights
+    function updateMarkers(flights) {
+      flights.forEach(flight => {
+        if (flight.live && flight.live.latitude && flight.live.longitude) {
+          // Check if marker already exists for this flight
+          if (!flight.marker) {
+            // Create new marker for the flight
+            flight.marker = new mapboxgl.Marker()
+              .setLngLat([flight.live.longitude, flight.live.latitude])
+              .setPopup(new mapboxgl.Popup().setHTML(`<b>Flight:</b> ${flight.flight.number}<br><b>Departure Airport:</b> ${flight.departure.airport}<br><b>Arrival Airport:</b> ${flight.arrival.airport}`))
+              .addTo(map);
+          } else {
+            // Update existing marker position
+            flight.marker.setLngLat([flight.live.longitude, flight.live.latitude]);
+          }
+        }
+      });
+    }
+  
+    // Function to fetch flight data from Aviationstack API
+    
+  </script>
+  

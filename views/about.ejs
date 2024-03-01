@@ -1,0 +1,17 @@
+<!-- about.ejs -->
+
+<h1>About</h1>
+
+<div class="card">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <% flights.forEach(flight => { %>
+        <li class="list-group-item">
+          <span class="fw-bold">Flight Number:</span> <%= flight.flight.number %>, 
+          <span class="fw-bold">Departure Airport:</span> <%= flight.departure.airport %>, 
+          <span class="fw-bold">Arrival Airport:</span> <%= flight.arrival.airport %>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</div>
